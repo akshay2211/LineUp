@@ -13,9 +13,7 @@ import com.activeandroid.query.Select
 import com.fxn.adapters.HomeAdapter
 import com.fxn.lineup.R
 import com.fxn.models.TextItem
-import com.fxn.utilities.RevealAnimationSetting
 import com.fxn.utilities.Utility
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.util.*
 
@@ -38,10 +36,7 @@ class HomeFragment : Fragment() {
         var view: View = inflater.inflate(R.layout.fragment_home, container, false)
 
         view.recycleView.layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-        //view.recycleView.layoutManager = LinearLayoutManager(activity)
         view.recycleView.adapter = HomeAdapter(activity!!.applicationContext) {
-            //  Toast.makeText(activity, "${it.title} Clicked", Toast.LENGTH_SHORT).show()
-
             exitTransition = Fade()
             val input = InputFragment.newInstance(it, "")
             input.enterTransition = Fade()
@@ -54,21 +49,10 @@ class HomeFragment : Fragment() {
         var list: MutableList<TextItem> = Select().from(TextItem::class.java).execute<TextItem>()
 
         var homeholder: HomeAdapter = (view.recycleView.adapter as HomeAdapter)
-        /*Select()
-		.from(Item.class)
-		.where("Category = ?", category.getId())
-		.orderBy("Name ASC")
-		.execute();*/
+
         homeholder.addall(list)
-        /* var count: Int = 0;
-         while (count < 20) {
-             homeholder.addOne("asdadadsad asdasd\n asdsd asda sda sdasd as dasd asd asdasdasd a sdasdas dasda")
-             homeholder.addOne("asdasd asdsd asda sda \n sdasd as dasd asd asdasdasd a sdasdas dasda")
-             homeholder.addOne(" asd \nasdasdasd a sdasdas dasda")
-             ++count
-         }*/
+
         view.fab.setOnClickListener {
-            //  registerCircularRevealAnimation(context, view, constructRevealSettings(), Color.parseColor("#EFAD32"), Color.WHITE)
             activity!!.supportFragmentManager.beginTransaction()
                     .replace(R.id.container, InputFragment.newInstance(TextItem("", Utility.getCountedTime(Date()), 1), ""))
                     .addToBackStack("").commit()
@@ -87,14 +71,6 @@ class HomeFragment : Fragment() {
             fragment.arguments = args
             return fragment
         }
-    }
-
-    private fun constructRevealSettings(): RevealAnimationSetting {
-        return RevealAnimationSetting(
-                Math.abs(fab.x + fab.width / 2) as Int,
-                Math.abs(fab.y + fab.height / 2) as Int,
-                homeContainer.width,
-                homeContainer.height)
     }
 
 }

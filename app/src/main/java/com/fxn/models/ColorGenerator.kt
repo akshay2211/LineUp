@@ -29,6 +29,16 @@ class ColorGenerator(var type: Int) : Serializable {
         }
     }
 
+    fun getColorLight(context: Context): Int {
+        when (type) {
+            RED -> return ContextCompat.getColor(context, R.color.red_color_light)
+            BLUE -> return ContextCompat.getColor(context, R.color.blue_color_light)
+            GREEEN -> return ContextCompat.getColor(context, R.color.green_color_light)
+            YELLOW -> return ContextCompat.getColor(context, R.color.yellow_color_light)
+            else -> return ContextCompat.getColor(context, R.color.grey_color_light)
+        }
+    }
+
     fun getDrawable(): Int? {
         when (type) {
             RED -> return R.drawable.red_bg

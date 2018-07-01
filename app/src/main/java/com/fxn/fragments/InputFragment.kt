@@ -84,8 +84,6 @@ class InputFragment : Fragment(), TextWatcher {
                 c1.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 c1.set(Calendar.HOUR_OF_DAY, hourtime)
                 c1.set(Calendar.MINUTE, mintime)
-
-                // view.alarm.text = SimpleDateFormat("hh:mm a dd MMM yy").format(c1.time)
                 var s: String = SimpleDateFormat("MMM dd HH:mm:aa").format(c1.time).toString()
                 var str: Spannable = Spannable.Factory.getInstance().newSpannable(s)
                 str.setSpan(CustomTypefaceSpan(ResourcesCompat.getFont(activity!!.applicationContext, R.font.quicksand_bold)),

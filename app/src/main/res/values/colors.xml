@@ -10,4 +10,9 @@
     <color name="green_color">#6EAC83</color>
     <color name="yellow_color">#EFAD32</color>
     <color name="grey_color">#444648</color>
+    <color name="red_color_light">#FFF6EE</color>
+    <color name="blue_color_light">#EAF8FF</color>
+    <color name="green_color_light">#ECFFEE</color>
+    <color name="yellow_color_light">#FEFFE8</color>
+    <color name="grey_color_light">#FFFFFF</color>
 </resources>
