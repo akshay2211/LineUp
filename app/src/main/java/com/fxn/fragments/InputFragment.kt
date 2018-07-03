@@ -23,7 +23,6 @@ import java.util.*
 
 class InputFragment : Fragment(), TextWatcher {
 
-
     private var mParam1: TextItem? = null
     private var mParam2: String? = null
     var text: String? = ""
@@ -31,6 +30,7 @@ class InputFragment : Fragment(), TextWatcher {
     companion object {
         private val ARG_PARAM1 = "param1"
         private val ARG_PARAM2 = "param2"
+
         fun newInstance(param1: TextItem, param2: String): InputFragment {
             val fragment = InputFragment()
             val args = Bundle()
@@ -58,8 +58,7 @@ class InputFragment : Fragment(), TextWatcher {
         var s: String = SimpleDateFormat("MMM dd HH:mm:aa").format(Date()).toString()
         var str: Spannable = Spannable.Factory.getInstance().newSpannable(s)
         str.setSpan(CustomTypefaceSpan(ResourcesCompat.getFont(activity!!.applicationContext, R.font.quicksand_bold)),
-                0, 6,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                0, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         view.back_date.setText(str, TextView.BufferType.SPANNABLE)
         view.back.setOnClickListener { activity!!.onBackPressed() }
         //  view.viewPager.adapter = ColorAdapter(fragmentManager!!, 5)
@@ -87,8 +86,7 @@ class InputFragment : Fragment(), TextWatcher {
                 var s: String = SimpleDateFormat("MMM dd HH:mm:aa").format(c1.time).toString()
                 var str: Spannable = Spannable.Factory.getInstance().newSpannable(s)
                 str.setSpan(CustomTypefaceSpan(ResourcesCompat.getFont(activity!!.applicationContext, R.font.quicksand_bold)),
-                        0, 6,
-                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                        0, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                 view.alarm.setText(str, TextView.BufferType.SPANNABLE)
             }, hour, minutes, true).show()
         }, year, month, day)
