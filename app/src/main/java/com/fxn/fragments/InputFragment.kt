@@ -1,8 +1,6 @@
 package com.fxn.fragments
 
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.res.ResourcesCompat
@@ -62,37 +60,12 @@ class InputFragment : Fragment(), TextWatcher {
         view.back_date.setText(str, TextView.BufferType.SPANNABLE)
         view.back.setOnClickListener { activity!!.onBackPressed() }
         //  view.viewPager.adapter = ColorAdapter(fragmentManager!!, 5)
-        datepickerwork(view)
+
         view.main_input.setOnTouchListener { view, motionEvent -> false }
         return view
     }
 
-    private fun datepickerwork(view: View) {
-        val c = Calendar.getInstance()
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
-        val hour = c.get(Calendar.HOUR_OF_DAY)
-        val minutes = c.get(Calendar.MINUTE)
 
-        val dpd = DatePickerDialog(activity, DatePickerDialog.OnDateSetListener { _, yeardate, monthOfYear, dayOfMonth ->
-            TimePickerDialog(activity, TimePickerDialog.OnTimeSetListener { _, hourtime, mintime ->
-                val c1 = Calendar.getInstance()
-                c1.set(Calendar.YEAR, yeardate)
-                c1.set(Calendar.MONTH, monthOfYear)
-                c1.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                c1.set(Calendar.HOUR_OF_DAY, hourtime)
-                c1.set(Calendar.MINUTE, mintime)
-                var s: String = SimpleDateFormat("MMM dd HH:mm:aa").format(c1.time).toString()
-                var str: Spannable = Spannable.Factory.getInstance().newSpannable(s)
-                str.setSpan(CustomTypefaceSpan(ResourcesCompat.getFont(activity!!.applicationContext, R.font.quicksand_bold)),
-                        0, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                view.alarm.setText(str, TextView.BufferType.SPANNABLE)
-            }, hour, minutes, true).show()
-        }, year, month, day)
-        view.alarm.setOnClickListener { dpd.show() }
-
-    }
 
 
     override fun onDestroyView() {

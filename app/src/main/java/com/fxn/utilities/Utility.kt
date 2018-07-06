@@ -1,15 +1,22 @@
 package com.fxn.utilities
 
 import android.app.Activity
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.graphics.PorterDuff
 import android.os.Build
 import android.support.annotation.ColorInt
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
+import android.text.Spannable
 import android.text.format.DateUtils
 import android.util.DisplayMetrics
+import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.TextView
+import com.fxn.lineup.R
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -65,16 +72,32 @@ class Utility {
             }
 
         }
+
+        private fun datepickerwork(view: View, context: Activity) {
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+            val hour = c.get(Calendar.HOUR_OF_DAY)
+            val minutes = c.get(Calendar.MINUTE)
+
+            val dpd = DatePickerDialog(context, DatePickerDialog.OnDateSetListener { _, yeardate, monthOfYear, dayOfMonth ->
+                TimePickerDialog(context, TimePickerDialog.OnTimeSetListener { _, hourtime, mintime ->
+                    val c1 = Calendar.getInstance()
+                    c1.set(Calendar.YEAR, yeardate)
+                    c1.set(Calendar.MONTH, monthOfYear)
+                    c1.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                    c1.set(Calendar.HOUR_OF_DAY, hourtime)
+                    c1.set(Calendar.MINUTE, mintime)
+                    var s: String = SimpleDateFormat("MMM dd HH:mm:aa").format(c1.time).toString()
+                    var str: Spannable = Spannable.Factory.getInstance().newSpannable(s)
+                    str.setSpan(CustomTypefaceSpan(ResourcesCompat.getFont(context.applicationContext, R.font.quicksand_bold)),
+                            0, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    //  view.alarm.setText(str, TextView.BufferType.SPANNABLE)
+                }, hour, minutes, true).show()
+            }, year, month, day)
+            // view.alarm.setOnClickListener { dpd.show() }
+
+        }
     }
-
-
-    /*public static void getScreenSize(Activity context) {
-       displayMetrics = context.getResources().getDisplayMetrics();
-       Constants.HeightPX = displayMetrics.heightPixels;
-       Constants.WidthPX = displayMetrics.widthPixels;
-       Constants.HeightDP = (int) (Constants.HeightPX / displayMetrics.density);
-       Constants.WidthDP = (int) (Constants.WidthPX / displayMetrics.density);
-       Log.e("WidthPX HeightPX", "" + Constants.WidthPX + " " + Constants.HeightPX);
-       Log.e("WidthDP HeightDP", "" + Constants.WidthDP + " " + Constants.HeightDP);
-   }*/
 }
