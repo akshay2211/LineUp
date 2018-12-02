@@ -66,18 +66,23 @@ class InputFragment : Fragment(), TextWatcher {
     }
 
 
-
-
     override fun onDestroyView() {
         super.onDestroyView()
-        if (mParam1 == null && text!!.length != 0) {
-            TextItem(text!!, Utility.getCountedTime(Date()), 1).save()
-        } else if (text!!.length == 0 && mParam1 != null) {
+        if (mParam1 == null && text!!.isNotEmpty()) {
+            TextItem(text!!, Utility.getDateTimeString(), 1).save()
+            return
+        } else if (text!!.isEmpty() && mParam1 != null && mParam1!!.title.isNotEmpty()) {
             mParam1!!.delete()
             return
+        } else if (text!!.isEmpty()) {
+            return
+        }
+        if (mParam1!!.title != text) {
+            mParam1!!.date = Utility.getDateTimeString()
         }
         mParam1!!.color = 0
-        mParam1!!.title = text
+        mParam1!!.title = "" + text
+
         mParam1!!.save()
     }
 

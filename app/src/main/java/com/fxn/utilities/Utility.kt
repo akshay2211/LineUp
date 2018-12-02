@@ -25,12 +25,18 @@ import java.util.*
  */
 class Utility {
     companion object {
+
+        val dateTime = SimpleDateFormat("dd-MM-yyy hh:mm:ss:aa")
         fun window(context: Activity) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 //context.window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 //      WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
                 context.window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             }
+        }
+
+        fun getDateTimeString(): String {
+            return dateTime.format(Date())
         }
 
         fun getScreensize(context: Activity): DisplayMetrics {
@@ -42,8 +48,9 @@ class Utility {
             return disp
         }
 
-        fun getCountedTime(date: Date): String {
-            return DateUtils.getRelativeTimeSpanString(date.time, System.currentTimeMillis(),
+        fun getCountedTime(date: String): String {
+            val time = dateTime.parse(date).time
+            return DateUtils.getRelativeTimeSpanString(time, System.currentTimeMillis(),
                     DateUtils.SECOND_IN_MILLIS, DateUtils.FORMAT_ABBREV_ALL).toString()
         }
 

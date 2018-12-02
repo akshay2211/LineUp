@@ -64,7 +64,7 @@
             android:scrollbars="vertical"
             android:text="hello"
             android:textColor="#E77764"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:transitionName="sharedImage" />
 
         <LinearLayout

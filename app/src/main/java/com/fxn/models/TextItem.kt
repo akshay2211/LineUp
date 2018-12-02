@@ -13,7 +13,7 @@ import java.io.Serializable
 class TextItem() : Serializable, Model() {
 
     @Column(name = "title")
-    var title: String? = ""
+    var title: String = ""
     @Column(name = "date")
     var date: String = ""
     @Column(name = "color_type")

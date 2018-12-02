@@ -15,7 +15,6 @@ import com.fxn.lineup.R
 import com.fxn.models.TextItem
 import com.fxn.utilities.Utility
 import kotlinx.android.synthetic.main.fragment_home.view.*
-import java.util.*
 
 
 class HomeFragment : Fragment() {
@@ -54,7 +53,7 @@ class HomeFragment : Fragment() {
 
         view.fab.setOnClickListener {
             activity!!.supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, InputFragment.newInstance(TextItem("", Utility.getCountedTime(Date()), 1), ""))
+                    .replace(R.id.container, InputFragment.newInstance(TextItem("", Utility.getDateTimeString(), 1), ""))
                     .addToBackStack("").commit()
         }
         return view

@@ -12,6 +12,7 @@ import com.fxn.lineup.R
 import com.fxn.models.ColorGenerator
 import com.fxn.models.TextItem
 import com.fxn.utilities.CustomTypefaceSpan
+import com.fxn.utilities.Utility
 import kotlinx.android.synthetic.main.home_list_row.view.*
 import java.util.*
 
@@ -41,7 +42,7 @@ class HomeAdapter(var context: Context, var listner: (TextItem) -> Unit) : Recyc
         return list.size
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun bindItems(user: TextItem, listner: (TextItem) -> Unit) = with(itemView) {
             var s: String? = user.title
@@ -49,14 +50,15 @@ class HomeAdapter(var context: Context, var listner: (TextItem) -> Unit) : Recyc
             var str: Spannable = Spannable.Factory.getInstance().newSpannable(s)
             var length: Int = s.indexOf("\n")
             if (length <= 0) length = s.length
-            var res = ColorGenerator(user.color)
+            //var res = ColorGenerator(user.color)
+            var res = ColorGenerator(adapterPosition % 4)
             itemView.main.setBackgroundResource(res.getDrawable()!!)
             itemView.title.setTextColor(res.getColor(context))
             itemView.date.setTextColor(res.getColor(context))
             str.setSpan(CustomTypefaceSpan(ResourcesCompat.getFont(context, R.font.quicksand_bold)), 0, length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             itemView.title.setText(str, TextView.BufferType.SPANNABLE)
-            itemView.date.text = user.date
+            itemView.date.text = Utility.getCountedTime(user.date)
             itemView.setOnClickListener { listner(user) }
         }
     }
